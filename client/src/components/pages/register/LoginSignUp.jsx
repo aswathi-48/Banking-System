@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import './LoginSignUpP.css';
+import './LoginSignUp.css';
 import { BiSolidUser } from 'react-icons/bi';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { MdEmail }from 'react-icons/md';
