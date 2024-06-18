@@ -1,0 +1,101 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.footer{
+    padding: 30px 40px;
+    width: 100%;
+    /* background: #ecf2f7; */
+    background: whitesmoke;
+}
+.container1{
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.container1 .about{
+    max-width: 100%;
+}
+.container1 .detail1 p{
+    margin-top: 20px;
+    font-size: 16;
+    color: #010f1c;
+}
+.icon1{
+    margin-top: 20px;
+    display: flex;
+}
+.icon1 li{
+    margin-left: 20px;
+    list-style: none;
+    padding: 10px 10px;
+    box-shadow: rgba(0,0,0,0.15) 1.9px 1.95px 2.6px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.icon1 li:hover{
+    background-color: green;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+
+}
+.accounts{
+    margin-right: 290px;
+    margin-top: 30px;
+}
+.accounts h3{
+    font-size: 32px;
+    margin-right: 18px;
+    color: #010f1c;
+}
+.accounts ul{
+    margin-top: 25px;
+    color: #010f1c;
+    font-size: 14px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.accounts ul li:hover{
+    color: green;
+}
+.accounts li{
+    /* margin-left: 50px; */
+    margin-left: 20px;
+    padding: 2px;
+    list-style: none;
+}
+
+
+.pages{
+    margin-right: 290px;
+    margin-top: 30px;
+}
+.pages h3{
+    font-size: 32px;
+    margin-right: 18px;
+    color: #010f1c;
+}
+.pages ul{
+    margin-top: 25px;
+    color: #010f1c;
+    font-size: 14px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.pages ul li:hover{
+    color: green;
+}
+.pages li{
+    margin-left: 20px;
+    padding: 2px;
+    list-style: none;}
+.logo-head{
+    color: blue;
+}
+.follow{
+    margin-top: 20px;
+}

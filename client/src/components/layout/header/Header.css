@@ -1,0 +1,126 @@
+.Nav{
+    height: 80px;
+    /* border: 1px solid black; */
+    box-shadow: 0px 5px 18px #0000000d;
+
+}
+.Nav-main{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.Nav-logo{
+    margin-bottom: 20px;
+}
+.Nav-logo .imgggg{
+    /* margin-bottom: 100px; */
+    width: 100px;
+    /* margin-bottom: 1160px; */
+    margin-left: 100px;
+    margin-top: -20px;
+  
+}
+
+.Nav-cat{
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.Nav-cat button{
+    padding: 5px ;
+    margin-left: 13px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    /* outline: none; */
+    background-color: white;
+}
+.Nav-search{
+    margin-top: 22px;
+    border-radius: 10px;
+}
+.Nav-search input{
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+}
+.Nav-search button{
+    border-radius: 10px;
+    border:1px solid rgb(161, 159, 159);
+    background: none;
+
+}
+.icons-one{
+    display: inline;
+}
+.search-icon{
+    /* margin-top: 5px; */
+    height: 10px;
+}
+.Nav-cart{
+    /* margin-top: 20px; */
+    /* margin-right: 33px; */
+    /* width: 50px; */
+    display: flex;
+    cursor: pointer;
+}
+.Nav-cart .icons{
+    margin-right: 23px;
+    cursor: pointer;
+    margin-top: 20px;
+    /* height: 30px; */
+    
+}
+.login-btn-link{
+    /* background: rgb(103, 214, 103); */
+    border-radius: 10px;
+    height: 40px;
+    width: 50px;
+    margin-top: 20px;
+    /* color: rgb(210, 195, 195);/ */
+    color: rgb(69, 221, 244);
+    text-decoration: none;
+    margin-right: 30px;
+}
+.userlogut{
+   margin-right: 100px;
+   margin-top: 24px;
+   color: rgb(90, 9, 117);
+
+}
+.userlogut:hover{
+    color: red;
+}
+
+
+@media (max-width: 768px) {
+    .Nav-main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .Nav-cat {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Nav-cat button {
+        margin-left: 0;
+        margin-bottom: 5px;
+    }
+
+    .Nav-search {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .Nav-cart {
+        margin-top: 10px;
+    }
+
+    .userlogut {
+        margin-top: 20px;
+        margin-right: 10px;
+    }
+}

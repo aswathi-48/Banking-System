@@ -1,0 +1,38 @@
+/* Home.css */
+.container {
+    max-width: 100%;
+    /* padding: 5 20px;  */
+    margin: 0 auto;
+  }
+  .slider {
+    position: relative;
+    width: 100%;
+  }
+  
+  .slider img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .slider-content {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 20px;
+  }
+  
+  .slider-content h2 {
+    margin-bottom: 10px; 
+  }
+  
+  .slider-content p {
+    margin: 0;
+    color: rgb(203, 199, 199);
+  }
+  
+  
