@@ -6,9 +6,10 @@ import LoginPage from './components/pages/login/LoginPage';
 import Home from './components/pages/home/Home';
 import Root from './components/Root/Root';
 import Profile from './components/pages/home/Profile';
-import Navbar from './components/dashboard/Navbar';
-import Main from './components/dashboard/Main';
-import SideBar from './components/dashboard/SideBar';
+import TransactionHistory from './components/dashboard/TransactionHistory';
+import Dashboard from './components/dashboard/Dashboard';
+import DashboardContent from './components/dashboard/DashboardContent';
+
 
 
 function App() {
@@ -26,9 +27,29 @@ function App() {
         {
           path:'/profile',
           element:<Profile/>
-        }
-      ]
-    },
+        },
+         {
+        path: 'dashboard',
+        element: <Dashboard />, // Set Dashboard as the parent component
+        children: [
+          {
+            path: 'dashboardContent',
+            element: <DashboardContent />
+          },
+          {
+            path: 'profile',
+            element: <Profile />
+          },
+          {
+            path: 'transaction-history',
+            element: <TransactionHistory />
+          },
+          // Add more routes as needed
+        ]
+      }
+    ]
+  },
+   
     {
       path:"register",
       element:<RegistrationForm/>
@@ -47,11 +68,7 @@ function App() {
   return (
     <div className="App">
       <RouterProvider router = {router}></RouterProvider>
-      <div className='grid-container'>
-        <Navbar/>
-        <SideBar/>
-        <Main/>
-      </div>
+ 
     </div>
   );
 }

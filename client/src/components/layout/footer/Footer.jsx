@@ -17,7 +17,7 @@ const Footer = () => {
                     </div>
                     <div className='detail1'>
                         <p>"I saw a bank that said '24 Hour Banking', but I don't have that much time.
-                        Read more at https://www.brainyquote.com/topics/banking-quotes"</p>
+                       "</p>
                         
                     </div>
                 </div>
