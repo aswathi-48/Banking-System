@@ -9,6 +9,9 @@ import Profile from './components/pages/home/Profile';
 import TransactionHistory from './components/dashboard/TransactionHistory';
 import Dashboard from './components/dashboard/Dashboard';
 import DashboardContent from './components/dashboard/DashboardContent';
+import AdminDashboard from './components/Admin/AdminDashboard';
+import ClientUsers from './components/Admin/ClientUsers';
+import AdminContent from './components/Admin/AdminContent';
 
 
 
@@ -44,7 +47,24 @@ function App() {
             path: 'transaction-history',
             element: <TransactionHistory />
           },
-          // Add more routes as needed
+        ]
+      },
+      {
+        path: 'admin_dashboard',
+        element: <AdminDashboard/>,
+        children: [
+          {
+            path: 'adminContent',
+            element: <AdminContent />
+          },
+          {
+            path: 'profile',
+            element: <Profile />
+          },
+          {
+            path: 'clients',
+            element: <ClientUsers/>
+          },
         ]
       }
     ]

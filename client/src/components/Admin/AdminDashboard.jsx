@@ -1,14 +1,13 @@
-// components/dashboard/Dashboard.js
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import SideBarComponent from './SideBarComponent';
+import AdminSidebar from './AdminSidebar';
 
-const Dashboard = () => {
+
+const AdminDashboard = () => {
   return (
     <div className="dashboard">
-      {/* <Navbar /> */}
       <div className="dashboard-container">
-        <SideBarComponent/>
+        <AdminSidebar/>
         <div className="dashboard-content">
           <Outlet />
         </div>
@@ -17,4 +16,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

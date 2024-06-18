@@ -6,7 +6,6 @@ import fs from 'fs'
 import bcrypt from 'bcrypt'
 
 
-
 export const register = async (req, res, next) => {
 
     try {
@@ -123,7 +122,7 @@ export const getClientUsers = async (req, res, next) => {
 
   try {
 
-    const clients = await User.find({ role: 'client',  isDeleted: false}).select('-password')
+    const clients = await User.find({ role: 'client',  isdeleted: false}).select('-password')
     console.log(clients,"dataa");
     if (!clients || clients.length === 0) {
 
@@ -144,6 +143,7 @@ export const getClientUsers = async (req, res, next) => {
     return next(new HttpError("Oops! Process failed, please contact admin", 500));
   }
 };
+
      
 export const editUser = async (req, res, next) => {
   try {
@@ -204,40 +204,37 @@ export const editUser = async (req, res, next) => {
 }
 
 
-export const deleteUser = async(req, res, next) => {
-
+export const deleteUser = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
 
-      const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return next(new HttpError("Validation failed, please check your data", 422));
+    }
 
-      if (!errors.isEmpty()) {
+    const { role } = req.userDetails;
 
-          return next(new HttpError("Something went wrong.."), 422)
+    if (role !== 'admin') {
+      return next(new HttpError("Only admin users can delete other users", 403));
+    }
 
-      } else {
+    const { userId } = req.body;
 
-          const { role } = req.userDetails
+    // Update the user's isdeleted field to true
+    const user = await User.findByIdAndUpdate(userId, { isdeleted: true });
 
-          if ( role !== 'admin' ) {
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
 
-              return next(new HttpError("Oops! Process failed, admin can only delete book", 400))
+    res.status(200).json({
+      status: true,
+      message: "Successfully deleted user",
+      data: user
+    });
 
-          } else {
-
-              const { userId } = req.body      
-
-              const deleteUser = await User.findByIdAndUpdate(userId, { isdeleted:true })
-
-              res.status(200).json({
-                  status : true,
-                  message : "sucessfully deleted",
-                  data : deleteUser
-              })
-          }
-      }
-
-  } catch(err) {
-      console.error(err)
-      return next(new HttpError("Oops! Process failed, please do contact admin", 500))
+  } catch (err) {
+    console.error(err);
+    return next(new HttpError("Oops! Process failed, please contact admin", 500));
   }
-}
+};

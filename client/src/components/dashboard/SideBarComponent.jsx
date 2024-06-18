@@ -1,9 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaTachometerAlt, FaUser, FaHistory, FaCreditCard } from 'react-icons/fa';
 import './SideBarComponent.css'; 
+import { LuLogOut } from "react-icons/lu";
 
 const SideBarComponent = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    navigate('/login'); 
+  };
+
   return (
     <div className="sidebar">
       <ul>
@@ -34,6 +43,12 @@ const SideBarComponent = () => {
             <FaCreditCard className="sidebar-icon" />
             <span>Account Details</span>
           </Link>
+        </li>
+        <li>
+          {/* <LuLogOut className="sidebar-icon" /> */}
+          <a className="logout-button" onClick={handleLogout}>
+            Logout
+          </a>
         </li>
       </ul>
     </div>
