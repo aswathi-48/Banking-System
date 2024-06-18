@@ -15,6 +15,10 @@ const AccountSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    balance: {
+        type: String,
+        require: true,
+    },
     ifsc_code: {
         type: String,
         require: true,

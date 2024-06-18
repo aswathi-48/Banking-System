@@ -20,11 +20,16 @@
     const onSubmit = async (data) => {
       try {
         const response = await axios.post('http://localhost:7100/user/login', data);
-        const { access_token } = response.data;
+        const { access_token, role, userId } = response.data;
         localStorage.setItem('access_token', access_token);
+        localStorage.setItem('userId', userId)
         alert('Login successful!');
-        navigate('/'); 
-      } catch (error) {
+        if (role === 'admin') {
+          navigate('/admin_dashboard'); 
+        } else {
+          navigate('/'); 
+        }
+        } catch (error) {
         console.error('There was an error!', error);
         alert('Invalid credentials');
       }

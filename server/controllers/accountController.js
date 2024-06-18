@@ -10,13 +10,14 @@ export const addAccount = async (req, res, next) => {
             return next(new HttpError("Invalid data inputs passed, please check your data before retry!", 422));
         }
 
-        const { user: userId, account_no, branch, ifsc_code } = req.body;
+        const { user: userId, account_no, branch, ifsc_code , balance} = req.body;
 
         const newAccount = new Account({
             user: userId,
             account_no,
             branch,
             ifsc_code,
+            balance,
         });
 
         const savedAccount = await newAccount.save();
@@ -65,10 +66,10 @@ export const editAccount = async (req, res, next) => {
             return next(new HttpError("Invalid inputs passed, please check ...", 422));
         }
 
-        const { accountId, account_no, branch, ifsc_code } = req.body;
+        const { accountId, account_no, branch, ifsc_code, balance } = req.body;
         // const { accountId } = req.params;
 
-        const updatedAccount = await Account.findByIdAndUpdate(accountId, { account_no, branch, ifsc_code }, { new: true });
+        const updatedAccount = await Account.findByIdAndUpdate(accountId, { account_no, branch, ifsc_code, balance }, { new: true });
 
         if (!updatedAccount) {
             return next(new HttpError("Account not found", 404));
