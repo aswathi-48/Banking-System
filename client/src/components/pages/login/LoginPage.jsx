@@ -20,11 +20,13 @@
     const onSubmit = async (data) => {
       try {
         const response = await axios.post('http://localhost:7100/user/login', data);
-        const { access_token, role, userId } = response.data;
+        const { access_token, result } = response.data;
         localStorage.setItem('access_token', access_token);
-        localStorage.setItem('userId', userId)
+        localStorage.setItem('userId', result._id)
+        localStorage.setItem("role", result.role);
+
         alert('Login successful!');
-        if (role === 'admin') {
+        if ( result.role === 'admin') {
           navigate('/admin_dashboard'); 
         } else {
           navigate('/'); 

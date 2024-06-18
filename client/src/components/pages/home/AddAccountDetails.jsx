@@ -2,80 +2,52 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { addAccount } from '../../../redux/accountslice';
 
 const validationSchema = yup.object().shape({
   account_no: yup.string().required('Account number is required'),
   branch: yup.string().required('Branch is required'),
   ifsc_code: yup.string().required('IFSC code is required'),
-  balance: yup.number().required('Balance is required').positive('Balance must be a positive number'),
+  balance: yup.number().required('Balance is required').positive('Balance must be positive')
 });
 
-const AddAccountDetails = ({ open, handleClose }) => {
+const AddAccountDetails = ({ onAddAccount }) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema)
   });
-  const dispatch = useDispatch();
-  const { status, error } = useSelector((state) => state.account);
 
-  const onSubmit = async (data) => {
-    try {
-      await dispatch(addAccount(data));
-      handleClose(); 
-    } catch (err) {
-      console.error('Error adding account details:', err);
-    }
+  const onSubmit = data => {
+    const userId = localStorage.getItem('userId');
+    onAddAccount({ ...data, user: userId });
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Add Account Details</DialogTitle>
-      <DialogContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            label="Account Number"
-            {...register('account_no')}
-            error={!!errors.account_no}
-            helperText={errors.account_no?.message}
-            fullWidth
-            margin="dense"
-          />
-          <TextField
-            label="Branch"
-            {...register('branch')}
-            error={!!errors.branch}
-            helperText={errors.branch?.message}
-            fullWidth
-            margin="dense"
-          />
-          <TextField
-            label="IFSC Code"
-            {...register('ifsc_code')}
-            error={!!errors.ifsc_code}
-            helperText={errors.ifsc_code?.message}
-            fullWidth
-            margin="dense"
-          />
-          <TextField
-            label="Balance"
-            type="number"
-            {...register('balance')}
-            error={!!errors.balance}
-            helperText={errors.balance?.message}
-            fullWidth
-            margin="dense"
-          />
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit" variant="contained" color="primary" disabled={status === 'loading'}>
-              {status === 'loading' ? 'Saving...' : 'Add '}
-            </Button>
-          </DialogActions>
-        </form>
-      </DialogContent>
-    </Dialog>
+    <div style={{ width:"360px"}}>
+
+    
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label>Account Number</label>
+        <input {...register('account_no')} />
+        <p>{errors.account_no?.message}</p>
+      </div>
+      <div>
+        <label>Branch</label>
+        <input {...register('branch')} />
+        <p>{errors.branch?.message}</p>
+      </div>
+      <div>
+        <label>IFSC Code</label>
+        <input {...register('ifsc_code')} />
+        <p>{errors.ifsc_code?.message}</p>
+      </div>
+      <div>
+        <label>Balance</label>
+        <input type="number" {...register('balance')} />
+        <p>{errors.balance?.message}</p>
+      </div>
+      <button type="submit">Add Account</button>
+    </form>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ const Header = () => {
                 </div>
                 <div className='Nav-cat' style={{display:"flex"}}>
                     <Link to='/' > <button style={{color:"gray"}}>Home</button></Link>
-                    <Link to='dashboard' > <button style={{color:"gray"}}>Customer</button></Link>
+                    <Link to='dashboard/dashboardContent' > <button style={{color:"gray"}}>Customer</button></Link>
 
                 </div>
                 
