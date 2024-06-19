@@ -3,16 +3,18 @@
     max-width: 100%;
     /* padding: 5 20px;  */
     margin: 0 auto;
+
   }
   .slider {
     position: relative;
-    width: 100%;
+    max-width: 100%;
   }
   
   .slider img {
     width: 100%;
     height: auto;
     display: block;
+    max-width: 100%; 
   }
   
   .slider-content {

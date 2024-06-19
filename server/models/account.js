@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 
 const AccountSchema = new mongoose.Schema({
-
     user: {
-        ref : "userValue",
+        ref: "userValue",
         type: mongoose.Schema.Types.ObjectId,
-        require:true,
+        require: true,
     },
     account_no: {
         type: String,

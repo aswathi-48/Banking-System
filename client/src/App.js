@@ -13,7 +13,7 @@ import AdminDashboard from './components/Admin/AdminDashboard';
 import ClientUsers from './components/Admin/ClientUsers';
 import AdminContent from './components/Admin/AdminContent';
 import AccountDetails from './components/dashboard/AccountDetails';
-
+import AllAccountGet from './components/Admin/AllAccountGet';
 
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
         },
          {
         path: 'dashboard',
-        element: <Dashboard />, // Set Dashboard as the parent component
+        element: <Dashboard />, 
         children: [
           {
             path: 'dashboardContent',
@@ -72,7 +72,7 @@ function App() {
           },
           {
             path: 'account',
-            element: <AccountDetails />
+            element: <AllAccountGet/>
           },
         ]
       }

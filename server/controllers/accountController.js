@@ -120,6 +120,47 @@ export const getAccount = async (req, res, next) => {
       });
     }
   };
+
+
+
+  export const getAllAccounts = async (req, res, next) => {
+    try {
+        console.log("Fetching all accounts...");
+
+        const accounts = await Account.find()
+        // .populate({
+        //     path: "user",
+        //     select: "first_name email"
+        // });
+
+        console.log("Accounts retrieved:", accounts); 
+
+        if (!accounts || accounts.length === 0) {
+            console.log("No accounts found.");
+            return res.status(404).json({
+                status: false,
+                message: 'No accounts found',
+                data: null,
+            });
+        }
+
+        res.status(200).json({
+            status: true,
+            message: 'Accounts retrieved successfully',
+            data: accounts,
+        });
+    } catch (error) {
+        console.error('Error fetching accounts:', error);
+        return res.status(500).json({
+            status: false,
+            message: 'Oops! Process failed, please contact admin',
+            data: null,
+        });
+    }
+};
+
+
+
 export const editAccount = async (req, res, next) => {
     try {
         const errors = validationResult(req);
