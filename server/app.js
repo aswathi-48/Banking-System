@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { errorHandler, notFound } from './middlewares/errorMiddleware.js'
 import connection from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
+import transactionRoutes from './routes/transactionRoutes.js'
 import accountRoutes from './routes/accountRoutes.js'
 import { fileURLToPath } from 'url';
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({extended : true}))
 
 app.use('/user',userRoutes)
 app.use('/account',accountRoutes)
+app.use('/transaction',transactionRoutes)
 app.use('', express.static(join(__dirname, 'upload')));
 
 

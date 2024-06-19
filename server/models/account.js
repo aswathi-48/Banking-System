@@ -23,7 +23,7 @@ const AccountSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    isDeleted: {
+    isdeleted: {
         type: Boolean,
         default: false
       }

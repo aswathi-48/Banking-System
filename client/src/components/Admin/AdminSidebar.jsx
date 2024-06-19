@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaTachometerAlt, FaUser } from 'react-icons/fa'
+import { FaCreditCard, FaTachometerAlt, FaUser } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { LuLogOut } from "react-icons/lu";
 
@@ -37,6 +37,12 @@ const AdminSidebar = () => {
         <span>client Users</span>
         </Link>
       </li>
+      <li>
+          <Link to="account">
+            <FaCreditCard className="sidebar-icon" />
+            <span>Account Details</span>
+          </Link>
+        </li>
       <li>
       <li>
       {/* <LuLogOut className="sidebar-icon" /> */}

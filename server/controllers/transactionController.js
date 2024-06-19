@@ -1,6 +1,7 @@
-import Transaction from "../models/transaction.js";
 import HttpError from "../middlewares/httpError.js";
 import { validationResult } from "express-validator";
+import Transaction from "../models/transaction.js";
+import Account from "../models/account.js";
 
 export const deposit = async (req, res, next) => {
     try {
@@ -12,6 +13,7 @@ export const deposit = async (req, res, next) => {
         const { userId } = req.userDetails;
         const { amount } = req.body;
 
+        // Create new transaction
         const newTransaction = new Transaction({
             user: userId,
             type: "deposit",
@@ -20,14 +22,25 @@ export const deposit = async (req, res, next) => {
 
         const savedTransaction = await newTransaction.save();
 
-        // Update user's account balance or other relevant logic
+        // Update user's account balance
+        const account = await Account.findOne({ user: userId });
+        if (!account) {
+            return next(new HttpError("Account not found", 404));
+        }
+
+        account.balance += amount;
+        await account.save();
 
         res.status(200).json({
             status: true,
             message: "Deposit successful",
-            data: savedTransaction,
+            data: {
+                transaction: savedTransaction,
+                updatedAccount: account,
+            },
         });
     } catch (err) {
+        console.error(err);
         return next(new HttpError("Oops! Process failed, please contact admin.", 500));
     }
 };
@@ -42,6 +55,7 @@ export const withdraw = async (req, res, next) => {
         const { userId } = req.userDetails;
         const { amount } = req.body;
 
+        // Create new transaction
         const newTransaction = new Transaction({
             user: userId,
             type: "withdraw",
@@ -50,14 +64,28 @@ export const withdraw = async (req, res, next) => {
 
         const savedTransaction = await newTransaction.save();
 
-        // Update user's account balance or other relevant logic
+        const account = await Account.findOne({ user: userId });
+        if (!account) {
+            return next(new HttpError("Account not found", 404));
+        }
+
+        if (account.balance < amount) {
+            return next(new HttpError("Insufficient balance", 400));
+        }
+
+        account.balance -= amount;
+        await account.save();
 
         res.status(200).json({
             status: true,
             message: "Withdrawal successful",
-            data: savedTransaction,
+            data: {
+                transaction: savedTransaction,
+                updatedAccount: account,
+            },
         });
     } catch (err) {
+        console.error(err);
         return next(new HttpError("Oops! Process failed, please contact admin.", 500));
     }
 };

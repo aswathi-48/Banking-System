@@ -12,6 +12,7 @@ import DashboardContent from './components/dashboard/DashboardContent';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import ClientUsers from './components/Admin/ClientUsers';
 import AdminContent from './components/Admin/AdminContent';
+import AccountDetails from './components/dashboard/AccountDetails';
 
 
 
@@ -47,6 +48,10 @@ function App() {
             path: 'transaction-history',
             element: <TransactionHistory />
           },
+          {
+            path: 'account',
+            element: <AccountDetails />
+          },
         ]
       },
       {
@@ -64,6 +69,10 @@ function App() {
           {
             path: 'clients',
             element: <ClientUsers/>
+          },
+          {
+            path: 'account',
+            element: <AccountDetails />
           },
         ]
       }

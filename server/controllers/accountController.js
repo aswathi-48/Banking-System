@@ -33,32 +33,93 @@ export const addAccount = async (req, res, next) => {
 };
 
 
+// export const getAccount = async (req, res, next) => {
+//     try {
+//         const { userId } = req.userDetails;
+//         console.log(userId, "user");
+
+//         if (!userId) {
+//             return next(new HttpError("User ID not found in request details", 400));
+//         }
+
+//         const query = { user: userId, isdeleted: false };
+//         console.log('MongoDB Query:', query);
+
+//         const account = await Account.find(query);
+
+//         console.log(account, "account data");
+
+//         if (account.length === 0) {
+//             return next(new HttpError("Account not found", 404));
+//         }
+
+//         res.status(200).json({
+//             status: true,
+//             message: "Account details retrieved successfully",
+//             data: account,
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         return next(new HttpError("Oops! Process failed, please contact admin", 500));
+//     }
+// };
+
+
+// export const getAccount = async (req, res, next) => {
+
+
+//     try {
+//         console.log('User Details:', req.userDetails);
+
+//         const userId = req.userDetails.userId; 
+        
+//         console.log('User ID:', userId);
+
+//         const accounts = await Account.find({ user: userId, isDeleted: false }).populate('user');
+        
+//         console.log('Accounts:', accounts);
+
+//         if (!accounts.length) {
+//             return next(new HttpError("Account not found", 404));
+//         }
+
+//         res.status(200).json({
+//             status: true,
+//             message: "Account details retrieved successfully",
+//             data: accounts,
+//         });
+//     } catch (err) {
+//         return next(new HttpError("Oops! Process failed, please contact admin", 500));
+//     }
+// };
+
 export const getAccount = async (req, res, next) => {
-
     try {
-        const { userId } = req.userDetails;
-        console.log(userId,"user");
-
-        const account = await Account.find({ user: userId, isDeleted: false });
-
-            console.log(account,"gds");
-            console.log("gds");
-
-        if (!account) {
-            
-            return next(new HttpError("Account not found", 404));
-        }
-
-        res.status(200).json({
-            status: true,
-            message: "Account details retrieved successfully",
-            data: account,
+      const userId = req.userDetails.userId; // Extract userId from req.userDetails
+      const accounts = await Account.find({ user: userId, isDeleted: false }).populate('user');
+  
+      if (!accounts || accounts.length === 0) {
+        return res.status(404).json({
+          status: false,
+          message: 'Account not found',
+          data: null,
         });
-    } catch (err) {
-        return next(new HttpError("Oops! Process failed, please contact admin", 500));
+      }
+  
+      res.status(200).json({
+        status: true,
+        message: 'Account details retrieved successfully',
+        data: accounts,
+      });
+    } catch (error) {
+      console.error('Error fetching account details:', error);
+      return res.status(500).json({
+        status: false,
+        message: 'Oops! Process failed, please contact admin',
+        data: null,
+      });
     }
-};
-
+  };
 export const editAccount = async (req, res, next) => {
     try {
         const errors = validationResult(req);

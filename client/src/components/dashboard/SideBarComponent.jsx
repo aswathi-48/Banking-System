@@ -39,7 +39,7 @@ const SideBarComponent = () => {
           </Link>
         </li>
         <li>
-          <Link to="account-details">
+          <Link to="account">
             <FaCreditCard className="sidebar-icon" />
             <span>Account Details</span>
           </Link>
